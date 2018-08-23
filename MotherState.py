@@ -5,6 +5,7 @@ class MotherStateSingleton:
     _lock = threading.Lock()
 
     weather = 0
+    temperature = 20
 
     def __new__(cls):
         with cls._lock:
