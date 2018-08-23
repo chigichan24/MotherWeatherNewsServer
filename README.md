@@ -9,3 +9,6 @@ MotherWeatherNews server
 
 ## How to up server in local
 - ```python app.py```
+
+## How to deploy
+- `./deploy.sh`
