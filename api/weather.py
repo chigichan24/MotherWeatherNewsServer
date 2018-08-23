@@ -5,5 +5,6 @@ state = MotherStateSingleton()
 def show_weather():
     def main():
         weather = state.weather
-        return jsonify({'data': {'weather': weather }, 'error': None})
+        temperature = state.temperature
+        return jsonify({'data': {'weather': weather, 'temperature': temperature }, 'error': None})
     return try_request(main)
