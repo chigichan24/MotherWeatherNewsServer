@@ -1,5 +1,5 @@
+import os
 import requests
-from PIL import Image
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
@@ -21,17 +21,10 @@ def face_to_emotion(image_path=None, image=None):
     -------
     {'anger','contempt','disgust','fear','happiness','neutral','sadness','surprise'}
     """
-
     if image is None:
         image = open(image_path, 'rb')
-
-    subscription_key_path = "./config/azure_subscription_key"
-    subscription_key = "3"
-    with open(subscription_key_path, "r") as f:
-        subscription_key = f.readline().split('\n')[0]
-
+    subscription_key = os.getenv("AZURE_FACE_API_SUBSCRIPTION_KEY")
     endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect"
-
     headers = {
         'Ocp-Apim-Subscription-Key': subscription_key,
         'Content-Type': 'application/octet-stream'
@@ -41,7 +34,6 @@ def face_to_emotion(image_path=None, image=None):
         'returnFaceLandmarks': 'false',
         'returnFaceAttributes': 'emotion'
     }
-
     response = requests.post(endpoint, params=params, headers=headers, data=image)
     faces = response.json()
     emotion = faces[0]['faceAttributes']['emotion']
