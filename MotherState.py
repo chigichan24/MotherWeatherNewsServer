@@ -6,6 +6,7 @@ class MotherStateSingleton:
 
     weather = 0
     temperature = 20
+    weather_rates = [70, 20, 15, 5]
 
     def __new__(cls):
         with cls._lock:
