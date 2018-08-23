@@ -1,7 +1,7 @@
 from flask import *
 import api.exception as myex
 
-app = Blueprint('basic', __name__, url_prefix='/api/v1')
+app = Blueprint('api', __name__, url_prefix='/api/v1')
 
 def try_request(func):
     try:
@@ -9,5 +9,7 @@ def try_request(func):
     except ValueError:
         exception = myex.MethodNotAllowException()
         return exception.respnse()
-
+    except Exception:
+        exception = myex.InternalServerException()
+        return exception.response()
     return ret
