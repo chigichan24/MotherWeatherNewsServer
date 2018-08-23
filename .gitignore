@@ -1,0 +1,4 @@
+/config/*
+!.gitkeep
+.DS_Store
+__pycache__
