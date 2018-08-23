@@ -1,8 +1,11 @@
 from flask import Flask
+from api import basic
 import os
 
 app = Flask(__name__, static_url_path='')
 cf_port = int(os.getenv("PORT", 8000))
+
+app.register_bluprint(basic.app)
 
 @app.route('/')
 def index():
