@@ -4,5 +4,7 @@ from api.api import *
 def receive_sensors():
     def main():
         body = request.json
-        return jsonify({'error': None, 'data': body})
+        raw_text = body.get("text")
+        raw_image_data = body.get("image")
+        return jsonify({'error': None, 'data': "success"})
     return try_request(main)

@@ -1,18 +1,18 @@
-FROM python:2-alpine
+FROM python3
 
 COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-RUN apk --update add python py-pip openssl ca-certificates py-openssl wget bash linux-headers
+RUN apk --update add python3 py-pip openssl ca-certificates py-openssl wget bash linux-headers
 RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-dev py-pip build-base \
-  && pip install --upgrade pip \
-  && pip install --upgrade pipenv\
-  && pip install --upgrade -r /app/requirements.txt\
+  && pip3 install --upgrade pip \
+  && pip3 install --upgrade pipenv\
+  && pip3 install --upgrade -r /app/requirements.txt\
   && apk del build-dependencies
 
 COPY . /app
 
-ENTRYPOINT [ "python" ]
+ENTRYPOINT [ "python3" ]
 
-CMD [ "hello.py" ]
+CMD [ "app.py" ]
