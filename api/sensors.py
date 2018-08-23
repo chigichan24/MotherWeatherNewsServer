@@ -16,7 +16,7 @@ def receive_sensors():
             res = text_to_emotion(raw_text)
         if raw_image_data != None:
             d = raw_image_data.replace('//', '@').replace('@', '/')
-            img_data = base64.b64decode(d)
+            img_data = base64.b64decode(d.split(',')[1])
             res = face_to_emotion(image = img_data)
             state.update()
         return jsonify({'error': None, 'data': "success"})
