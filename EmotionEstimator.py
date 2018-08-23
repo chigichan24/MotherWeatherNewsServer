@@ -4,7 +4,7 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
-def faceToEmotion(image_path=None, image=None):
+def face_to_emotion(image_path=None, image=None):
     """
     顔画像から感情を推測して返す
 
@@ -47,7 +47,7 @@ def faceToEmotion(image_path=None, image=None):
     emotion = faces[0]['faceAttributes']['emotion']
     return emotion
 
-def textToEmotion(text):
+def text_to_emotion(text):
     """
     テキストから感情を推測して返す
 
