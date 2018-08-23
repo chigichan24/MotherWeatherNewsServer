@@ -6,5 +6,6 @@ def show_weather():
     def main():
         weather = state.weather
         temperature = state.temperature
-        return jsonify({'data': {'weather': weather, 'temperature': temperature }, 'error': None})
+        rates = state.weather_rates
+        return jsonify({'data': {'weather': weather, 'temperature': temperature ,'weather_rates': rates}, 'error': None})
     return try_request(main)
