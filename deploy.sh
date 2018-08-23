@@ -1,4 +1,4 @@
 #!/bin/sh
 
 bluemix target --cf
-cf push MotherWeatherNews -b https://github.com/cloudfoundry/python-buildpack
+bluemix cf push ${MOTHER_WEATHER_NEWS_SERVER_BLUEMIX_APP_NAME}
