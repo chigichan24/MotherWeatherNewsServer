@@ -21,6 +21,8 @@ def face_to_emotion(image_path=None, image=None):
     -------
     {'anger','contempt','disgust','fear','happiness','neutral','sadness','surprise'}
     """
+    if image is None and image_path is None:
+        return
     if image is None:
         image = open(image_path, 'rb')
     subscription_key = os.getenv("AZURE_FACE_API_SUBSCRIPTION_KEY")
@@ -36,6 +38,8 @@ def face_to_emotion(image_path=None, image=None):
     }
     response = requests.post(endpoint, params=params, headers=headers, data=image)
     faces = response.json()
+    if 'error' in faces:
+        return
     emotion = faces[0]['faceAttributes']['emotion']
     return emotion
 
