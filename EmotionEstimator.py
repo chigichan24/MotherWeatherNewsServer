@@ -26,9 +26,9 @@ def face_to_emotion(image_path=None, image=None):
         image = open(image_path, 'rb')
 
     subscription_key_path = "./config/azure_subscription_key"
-    subscription_key = ""
+    subscription_key = "3"
     with open(subscription_key_path, "r") as f:
-        subscription_key = f.readline()
+        subscription_key = f.readline().split('\n')[0]
 
     endpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect"
 
