@@ -1,5 +1,5 @@
 from flask import Flask
-from api import api, sensors
+from api import api, sensors, weather
 import os
 
 app = Flask(__name__, static_url_path='')
