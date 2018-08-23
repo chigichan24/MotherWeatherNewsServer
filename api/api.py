@@ -7,8 +7,8 @@ def try_request(func):
     try:
         ret = func()
     except ValueError:
-        exception = myex.MethodNotAllowException()
-        return exception.respnse()
+        exception = myex.MethodNotAllowedException()
+        return exception.response()
     except Exception:
         exception = myex.InternalServerException()
         return exception.response()
