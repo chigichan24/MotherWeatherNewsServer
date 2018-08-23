@@ -12,10 +12,14 @@ class MyException(Exception):
     @classmethod
     def response(cls):
         traceback.print_exc
-        return jsonify {
+        return jsonify (
             {'error': str(cls.error_message)}
-        }, cls.status_code
+        ), cls.status_code
 
 class MethodNotAllowedException(MyException):
     status_code = 405
     error_message = 'parse error. json format is not correct.'
+
+class InternalServerException(MyException):
+    staus_code = 500
+    error_message = 'unknown error.'
