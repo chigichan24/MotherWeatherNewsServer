@@ -9,3 +9,7 @@ def show_weather():
         rates = state.weather_rates
         return jsonify({'data': {'weather': weather, 'temperature': temperature ,'weather_rates': rates}, 'error': None})
     return try_request(main)
+
+@app.route("/chart")
+def chart():
+   return render_template('chart.html',rates=state.weather_rates,face=state.recent_face,text=state.recent_text)

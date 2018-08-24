@@ -11,6 +11,10 @@ class MotherStateSingleton:
     alpha = 0.9
     beta = 0.9
 
+    # test data
+    recent_face = {'anger': 0.013, 'contempt': 0.002, 'disgust': 0.0, 'fear': 0.001, 'happiness': 0.0, 'neutral': 0.611, 'sadness': 0.372, 'surprise': 0.0}
+    recent_text = {'magnitude': 0.699999988079071, 'score': 0.699999988079071}
+
     def __new__(cls):
         with cls._lock:
             if cls._instance is None:
@@ -19,12 +23,14 @@ class MotherStateSingleton:
 
     def update(self, face=None, text=None):
         if not(face is None):
+            recent_face = face
             self.alpha = face['neutral']/2 + 0.5
             self.weather_rates[0] = int(self.weather_rates[0] * self.alpha + (face['happiness'] + face['surprise'])*(1-self.alpha) * 100)
             self.weather_rates[1] = int(self.weather_rates[1] * self.alpha + face['neutral']*(1-self.alpha) * 100)
             self.weather_rates[2] = int(self.weather_rates[2] * self.alpha + (face['sadness'])*(1-self.alpha) * 100)
             self.weather_rates[3] = int(self.weather_rates[3] * self.alpha + (face['anger'] + face['contempt'] + face['fear'] + face['disgust'])*(1-self.alpha) * 100)
         if not(text is None):
+            recent_text = text
             x = text['score']
             if text['score'] < -0.3:
                 self.weather_rates[0] = int(self.weather_rates[0] * self.beta + 0*(1-self.beta) * 100)

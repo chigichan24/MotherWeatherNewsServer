@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      //setTimeout("location.reload()",1000*2.0);
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['天気', '推定値'],
+          ['晴れ', {{rates[0]}}],
+          ['曇り',  {{rates[1]}}],
+          ['雨',   {{rates[2]}}],
+          ['雷',   {{rates[3]}}]
+        ]);
+        var data2 = google.visualization.arrayToDataTable([
+          ['気分', '推定値'],
+          ['怒り', {{face['anger']}}],
+          ['軽蔑', {{face['contempt']}}],
+          ['嫌悪',  {{face['disgust']}}],
+          ['恐怖',  {{face['fear']}}],
+          ['幸福',  {{face['happiness']}}],
+          ['中立',  {{face['neutral']}}],
+          ['悲しみ',  {{face['sadness']}}],
+          ['驚き',  {{face['surprise']}}],
+        ]);
+
+        var options = {
+          title: '天気',
+          slices: [{color: 'orange'}, {color: 'gray'}, {color: 'blue'}, {color: 'yellow'}]
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('face'));
+
+        chart2.draw(data2);
+      }
+    </script>
+  </head>
+  <body>
+  {{rates}}
+    {{text}}
+    <div id="piechart" style="width: 700px; height: 400px; "></div>
+    <div id="face" style="width: 700px; height: 400px;"></div>
+  </body>
+</html>
