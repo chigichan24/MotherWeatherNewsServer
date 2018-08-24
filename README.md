@@ -5,7 +5,7 @@ MotherWeatherNews server
 - Python3.6
 
 ## How to set up
-- Google CloudのCloud Natural Language APIに登録し、サービスアカウントキー(json)を`/config/credential.json`に置く
+- Google CloudのCloud Natural Language APIに登録し、サービスアカウントキー(json)を`/config/credential.json`に置く
 - サービスアカウントキーが置いてある場所のpathを`GOOGLE_APPLICATION_CREDENTIALS`に入れる
 - Azureに登録し、Azure Face APIのAPIキーを`AZURE_FACE_API_SUBSCRIPTION_KEY`に入れる
 - FireBaseに登録し，server Keyを `FIREBASE_SERVER_KEY`に入れる
