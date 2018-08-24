@@ -6,8 +6,12 @@ class MotherStateSingleton:
 
     weather = 0
     temperature = 20
+    condition = "曇り"
+    advice = "可もなく不可もなく。今後の動向に注意"
     weather_rates = [70, 20, 15, 5]
     depricated_temp = [10,20,30,40]
+    weathers = ["晴れ", "曇り", "雨", "雷"]
+    advices = ["今日は安泰でしょう。", "可もなく不可もなく。今後の動向に注意", "悲しみの中にいます。触らぬ神に祟りなし。", "周りに気を配れ、嵐が、来る"]
     alpha = 0.9
     beta = 0.9
 
@@ -44,5 +48,7 @@ class MotherStateSingleton:
                 self.weather_rates[3] = int(self.weather_rates[3] * self.beta + 0*(1-self.beta) * 100)
         self.weather = self.weather_rates.index(max(self.weather_rates))
         self.temperature =  self.depricated_temp[self.weather]
-        #if self.weather == 3:
-            #trigger_to_firebase("気象庁", "母親雷警報発令中，母親の怒りに注意")
+        self.condition = self.weathers[self.weather]
+        self.advice = self.advices[self.weather]
+        if self.weather == 3 and max(self.weather_rates) > 75:
+            trigger_to_firebase("気象庁", "母親雷警報発令中，母親の怒りに注意")

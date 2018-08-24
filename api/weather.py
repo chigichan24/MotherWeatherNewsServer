@@ -7,7 +7,9 @@ def show_weather():
         weather = state.weather
         temperature = state.temperature
         rates = state.weather_rates
-        return jsonify({'data': {'weather': weather, 'temperature': temperature ,'weather_rates': rates}, 'error': None})
+        condition = state.condition
+        advice = state.advice
+        return jsonify({'data': {'weather': weather, 'temperature': temperature ,'weather_rates': rates, 'condition': condition, 'adivice': advice}, 'error': None})
     return try_request(main)
 
 @app.route("/chart")
