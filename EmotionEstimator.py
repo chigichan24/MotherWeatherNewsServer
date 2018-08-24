@@ -34,13 +34,18 @@ def face_to_emotion(image_path=None, image=None):
     params = {
         'returnFaceId': 'false',
         'returnFaceLandmarks': 'false',
-        'returnFaceAttributes': 'emotion'
+        'returnFaceAttributes': 'age,gender,emotion'
     }
     response = requests.post(endpoint, params=params, headers=headers, data=image)
     faces = response.json()
-    if 'error' in faces:
+    if 'error' in faces or len(faces) == 0:
         return
-    emotion = faces[0]['faceAttributes']['emotion']
+    female_faces = list(filter(lambda face: face['faceAttributes']['gender'] == 'female', faces))
+    if len(female_faces) != 0:
+        faces = female_faces
+    v, i = min((40 - face['faceAttributes']['age'],i) for (i,face) in enumerate(faces)) # argminをしてる
+    face = faces[i]
+    emotion = face['faceAttributes']['emotion']
     return emotion
 
 def text_to_emotion(text):
